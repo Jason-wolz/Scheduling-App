@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TextChangeTrigger"
+             x:Class="WGUTermApp.CourseEdit">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Name: "
+                       FontSize="Large"/>
+                <Editor WidthRequest="265"
+                        StyleId="Name">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <Label Text="Duration: "
+                   FontSize="Large"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Start- " 
+                       FontSize="Medium"/>
+                <DatePicker Format="yyyy-MM-dd" 
+                            Date="2021-09-01"
+                            StyleId="Start">
+                    <DatePicker.Triggers>
+                        <EventTrigger Event="PropertyChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </DatePicker.Triggers>
+                </DatePicker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="End- " 
+                       FontSize="Medium"/>
+                <DatePicker Format="yyyy-MM-dd" 
+                            Date="2021-09-30"
+                            StyleId="End">
+                    <DatePicker.Triggers>
+                        <EventTrigger Event="PropertyChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </DatePicker.Triggers>
+                </DatePicker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Status: "
+                       FontSize="Large"/>
+                <Picker x:Name="statusPicker" 
+                        WidthRequest="260"
+                        StyleId="Status">
+                    <Picker.Triggers>
+                        <EventTrigger Event="PropertyChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Picker.Triggers>
+                </Picker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Instructor: "
+                       FontSize="Large"/>
+                <Editor WidthRequest="230"
+                        StyleId="Instr">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <Label Text="Assessments:"
+                       FontSize="Large"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Performance Assessment- "
+                       FontSize="Medium"/>
+                <Editor WidthRequest="190"
+                        StyleId="Perform">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Objective Assessment- "
+                       FontSize="Medium"/>
+                <Editor WidthRequest="190"
+                        StyleId="Object">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="CenterAndExpand">
+                <Button Text="Cancel"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="CancelButton"/>
+                <Button Text="Save"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="SaveButton"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
