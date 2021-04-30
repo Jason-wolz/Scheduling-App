@@ -30,14 +30,7 @@ namespace WGUTermApp
 
         async private void EditButton(object sender, EventArgs e)
         {
-            //try
-            //{
-            await Navigation.PushModalAsync(new CourseEdit());
-            //}
-            //catch (NullReferenceException)
-            //{
-
-            //}
+            await Navigation.PushModalAsync(new CourseEdit());            
         }
     }
 }

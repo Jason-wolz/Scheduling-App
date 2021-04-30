@@ -48,9 +48,18 @@
             <StackLayout Orientation="Horizontal">
                 <Label Text="Status: "
                        FontSize="Large"/>
-                <Picker x:Name="statusPicker" 
+                <Picker x:Name="statusPicker"
                         WidthRequest="260"
                         StyleId="Status">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>In Progress</x:String>
+                            <x:String>Completed</x:String>
+                            <x:String>Dropped</x:String>
+                            <x:String>Planned</x:String>
+                            <x:String>Incomplete</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
                     <Picker.Triggers>
                         <EventTrigger Event="PropertyChanged">
                             <local:TextChangedAction/>

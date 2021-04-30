@@ -12,18 +12,11 @@ namespace WGUTermApp
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CourseEdit : ContentPage
 	{
+		
 		public CourseEdit ()
-		{
-			List<String> statuses = new List<string>()
-			{
-				"In Progress", "Completed", "Dropped", "Planned", "Incomplete"
-			};
-			InitializeComponent();
-			foreach (string item in statuses)
-			{
-				statusPicker.Items.Add(item);
-			}
-		}
+		{			
+			InitializeComponent();            
+        }
 
 
 

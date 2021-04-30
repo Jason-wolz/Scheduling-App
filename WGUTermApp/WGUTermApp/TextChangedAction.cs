@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 using WGUTermApp;
 
@@ -36,6 +37,10 @@ namespace TextChangeTrigger
                     break;
                 case status:
                     Picker picker = (Picker)visual;
+                    if (picker.SelectedItem == null)
+                    {
+                        picker.SelectedItem = "In Progress";
+                    }
                     app.Status = picker.SelectedItem.ToString();
                     break;
                 case instructor:
