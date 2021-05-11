@@ -20,8 +20,9 @@
             <Frame BackgroundColor="Goldenrod">
                 <Frame.Content>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand"
-                               VerticalOptions="Center">
+                        <Label  x:Name="Label1"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="Center">
                             Term 1: September 1st - February 28th
                         </Label>
                         <Button Text="&#x205D;"
@@ -53,8 +54,9 @@
             <Frame BackgroundColor="Goldenrod">
                 <Frame.Content>
                     <StackLayout Orientation="Horizontal">
-                        <Label HorizontalOptions="StartAndExpand"
-                               VerticalOptions="Center">
+                        <Label  x:Name="Label2"
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="Center">
                             Term 2: March 1st - August 31st
                         </Label>
                         <Button Text="&#x205D;"
