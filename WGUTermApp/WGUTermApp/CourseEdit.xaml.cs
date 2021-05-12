@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using TextChangeTrigger;
+using WGUTermApp.Models;
 
 namespace WGUTermApp
 {
@@ -15,7 +15,16 @@ namespace WGUTermApp
 		
 		public CourseEdit ()
 		{			
-			InitializeComponent();            
+			InitializeComponent();
+			List<Person> people = App.Tables.GetAllPeople();
+			List<Course> courses = App.Tables.GetAllCourses();
+			Name.Text = courses.ElementAt(0).Name;
+			Start.Date = courses.ElementAt(0).Start;
+			End.Date = courses.ElementAt(0).End;
+			statusPicker.SelectedItem = courses.ElementAt(0).Status;
+			Instructor.Text = people.ElementAt(0).Name;
+			Performance.Text = courses.ElementAt(0).Performance;
+			Objective.Text = courses.ElementAt(0).Objective;
         }
 
 

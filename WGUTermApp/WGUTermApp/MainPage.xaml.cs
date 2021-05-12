@@ -14,9 +14,10 @@ namespace WGUTermApp
         public MainPage()
         {
             InitializeComponent();
+            //sample data
             //DateTime now = DateTime.Now;
             //App.Tables.AddNewRecord(new Person("JimBob", "(333)-333-3333", "something@wgu.edu"));
-            //App.Tables.AddNewRecord(new Course("Bacon 102", now, now.AddMonths(1), "In Progress", 1, "Test 1", "Test 2", 1));
+            //App.Tables.AddNewRecord(new Course("Bacon 101", now, now.AddMonths(1), "In Progress", 1, "Test 1", "Test 2", 1));
             //List<Person> people = App.Tables.GetAllPeople();
             //Label1.Text = people.ElementAt(0).Name;
         }

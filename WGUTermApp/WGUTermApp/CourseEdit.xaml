@@ -9,7 +9,8 @@
                 <Label Text="Name: "
                        FontSize="Large"/>
                 <Editor WidthRequest="265"
-                        StyleId="Name">
+                        StyleId="Name"
+                        x:Name="Name">
                     <Editor.Triggers>
                         <EventTrigger Event="TextChanged">
                             <local:TextChangedAction/>
@@ -24,7 +25,8 @@
                        FontSize="Medium"/>
                 <DatePicker Format="yyyy-MM-dd" 
                             Date="2021-09-01"
-                            StyleId="Start">
+                            StyleId="Start"
+                            x:Name="Start">
                     <DatePicker.Triggers>
                         <EventTrigger Event="PropertyChanged">
                             <local:TextChangedAction/>
@@ -37,7 +39,8 @@
                        FontSize="Medium"/>
                 <DatePicker Format="yyyy-MM-dd" 
                             Date="2021-09-30"
-                            StyleId="End">
+                            StyleId="End"
+                            x:Name="End">
                     <DatePicker.Triggers>
                         <EventTrigger Event="PropertyChanged">
                             <local:TextChangedAction/>
@@ -71,7 +74,8 @@
                 <Label Text="Instructor: "
                        FontSize="Large"/>
                 <Editor WidthRequest="230"
-                        StyleId="Instr">
+                        StyleId="Instr"
+                        x:Name="Instructor">
                     <Editor.Triggers>
                         <EventTrigger Event="TextChanged">
                             <local:TextChangedAction/>
@@ -85,7 +89,8 @@
                 <Label Text="Performance Assessment- "
                        FontSize="Medium"/>
                 <Editor WidthRequest="190"
-                        StyleId="Perform">
+                        StyleId="Perform"
+                        x:Name="Performance">
                     <Editor.Triggers>
                         <EventTrigger Event="TextChanged">
                             <local:TextChangedAction/>
@@ -97,7 +102,8 @@
                 <Label Text="Objective Assessment- "
                        FontSize="Medium"/>
                 <Editor WidthRequest="190"
-                        StyleId="Object">
+                        StyleId="Object"
+                        x:Name="Objective">
                     <Editor.Triggers>
                         <EventTrigger Event="TextChanged">
                             <local:TextChangedAction/>

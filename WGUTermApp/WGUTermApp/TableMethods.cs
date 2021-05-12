@@ -31,6 +31,20 @@ namespace WGUTermApp
             return new List<Person>();
         }
 
+        public List<Course> GetAllCourses()
+        {
+            try
+            {
+                return conn.Table<Course>().ToList();
+            }
+            catch
+            {
+
+            }
+
+            return new List<Course>();
+        }
+
         public void AddNewRecord(Person person)
         {
             try
@@ -70,11 +84,11 @@ namespace WGUTermApp
             {
                 if (row > 0)
                 {
-                    if (table == "course")
+                    if (table == "Course")
                     {
                         conn.Delete<Course>(row);
                     }
-                    else if (table == "person")
+                    else if (table == "Person")
                     {
                         conn.Delete<Person>(row);
                     }

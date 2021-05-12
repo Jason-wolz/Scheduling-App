@@ -11,6 +11,7 @@ namespace WGUTermApp
     {
         static readonly string databasePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "CourseDatabase.db3");
         public static TableMethods Tables { get; private set; }
+        public static int currentClass;
         public App()
         {
             Tables = new TableMethods(databasePath);
