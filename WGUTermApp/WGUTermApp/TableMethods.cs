@@ -45,6 +45,7 @@ namespace WGUTermApp
             return new List<Course>();
         }
 
+        //add data validation
         public void AddNewRecord(Person person)
         {
             try

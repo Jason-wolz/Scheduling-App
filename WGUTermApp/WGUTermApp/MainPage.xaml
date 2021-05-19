@@ -16,76 +16,8 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView>
-        <StackLayout>            
-            <Frame BackgroundColor="Goldenrod">
-                <Frame.Content>
-                    <StackLayout Orientation="Horizontal">
-                        <Label  x:Name="Label1"
-                                HorizontalOptions="StartAndExpand"
-                                VerticalOptions="Center">
-                            Term 1: September 1st - February 28th
-                        </Label>
-                        <Button Text="&#x205D;"
-                                WidthRequest="30"
-                                HeightRequest="35"
-                                BackgroundColor="Goldenrod"
-                                Clicked="Button_Clicked" />
-                    </StackLayout>
-                </Frame.Content>
-            </Frame>
-            <Button Text="Course 1"
-                    Style="{StaticResource courseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 2"
-                    Style="{StaticResource altCourseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 3"
-                    Style="{StaticResource courseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 4"
-                    Style="{StaticResource altCourseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 5"
-                    Style="{StaticResource courseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 6"
-                    Style="{StaticResource altCourseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Frame BackgroundColor="Goldenrod">
-                <Frame.Content>
-                    <StackLayout Orientation="Horizontal">
-                        <Label  x:Name="Label2"
-                                HorizontalOptions="StartAndExpand"
-                                VerticalOptions="Center">
-                            Term 2: March 1st - August 31st
-                        </Label>
-                        <Button Text="&#x205D;"
-                                WidthRequest="30"
-                                HeightRequest="35"
-                                BackgroundColor="Goldenrod"
-                                Clicked="Button_Clicked" />
-                    </StackLayout>
-                </Frame.Content>
-            </Frame>
-            <Button Text="Course 1"
-                    Style="{StaticResource courseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 2"
-                    Style="{StaticResource altCourseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 3"
-                    Style="{StaticResource courseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 4"
-                    Style="{StaticResource altCourseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 5"
-                    Style="{StaticResource courseStyle}"
-                    Clicked="Button_Clicked"/>
-            <Button Text="Course 6"
-                    Style="{StaticResource altCourseStyle}"
-                    Clicked="Button_Clicked"/>
+        <StackLayout x:Name="Layout">            
+            
         </StackLayout>
     </ScrollView>
-
 </ContentPage>

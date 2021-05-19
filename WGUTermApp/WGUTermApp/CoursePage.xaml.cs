@@ -2,6 +2,7 @@
 using SQLite;
 using Xamarin.Essentials;
 using System.Collections.Generic;
+using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,18 +10,21 @@ namespace WGUTermApp
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CoursePage : ContentPage
-	{
-        readonly List<String> statuses = new List<string>()
-        {
-            "In Progress", "Completed", "Dropped", "Planned", "Incomplete"
-        };
+	{        
         public CoursePage ()
 		{
 			InitializeComponent ();
-            foreach (string item in statuses)
-            {
-                statusPicker.Items.Add(item);
-            }
+            var courses = App.Tables.GetAllCourses();
+            var course = courses.ElementAt(App.currentClass);
+            var people = App.Tables.GetAllPeople();
+            var person = people.ElementAt(course.Instructor - 1);
+            this.Title = course.Name;
+            statusPicker.SelectedItem = course.Status;
+            Start.Date = course.Start;
+            End.Date = course.End;
+            Instructor.Text = person.Name + ", " + person.Phone + ", " + person.Email;
+            Objective.Text = course.Objective;
+            Performance.Text = course.Performance;
 		}
 
         async private void CancelButton(object sender, EventArgs e)

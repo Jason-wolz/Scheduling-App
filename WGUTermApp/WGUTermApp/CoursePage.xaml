@@ -8,29 +8,48 @@
             <!--change text to implement database-->
             <StackLayout Orientation="Horizontal">
                 <Label Text="Duration: "/>
-                <DatePicker Format="yyyy-MM-dd" Date="2021-09-01" IsEnabled="False"/>
+                <DatePicker x:Name="Start" 
+                            Format="yyyy-MM-dd" 
+                            Date="2021-09-01" 
+                            IsEnabled="False"/>
                 <Label Text=" - "/>
-                <DatePicker Format="yyyy-MM-dd" Date="2021-09-30" IsEnabled="False"/>
+                <DatePicker x:Name="End" 
+                            Format="yyyy-MM-dd" 
+                            Date="2021-09-30" 
+                            IsEnabled="False"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Status: "/>
                 <Picker x:Name="statusPicker"
                         WidthRequest="250"
-                        HorizontalOptions="StartAndExpand"/>
+                        HorizontalOptions="StartAndExpand">
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>In Progress</x:String>
+                            <x:String>Completed</x:String>
+                            <x:String>Dropped</x:String>
+                            <x:String>Planned</x:String>
+                            <x:String>Incomplete</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>                    
+                </Picker>
             </StackLayout>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Instructor: "/>
                 <Label Text="Jason Wolz, 752-9762, jwolz1@wgu.edu"
-                       HorizontalOptions="StartAndExpand"/>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Assessments: "
-                       WidthRequest="100"/>
-                <Label Text="Objective Assessment Performance Assessment"
-                       HorizontalOptions="StartAndExpand"/>
-            </StackLayout>
+                       HorizontalOptions="StartAndExpand"
+                       x:Name="Instructor"/>
+            </StackLayout>            
+            <Label Text="Assessments: "
+                   WidthRequest="100"/>
+            <Label x:Name="Objective"
+                   Text="Objective Assessment"
+                   HorizontalOptions="StartAndExpand"/>
+            <Label x:Name="Performance"
+                   Text="Performance Assessment"
+                   HorizontalOptions="StartAndExpand"/>
             <Label Text="Notes:"/>
-            <Editor HeightRequest="400"/>
+            <Editor HeightRequest="250"/>
             <StackLayout Orientation="Horizontal">
                 <Button Text="Cancel"
                         Clicked="CancelButton"

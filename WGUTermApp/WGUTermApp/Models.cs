@@ -55,7 +55,7 @@ namespace WGUTermApp.Models
         }
     }
     [Table("classes")]
-    public class Course
+    public class Course//add another table for terms?
     {
         public Course()
         {
