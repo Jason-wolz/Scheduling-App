@@ -8,7 +8,7 @@
             <StackLayout Orientation="Horizontal">
                 <Label Text="Name: "
                        FontSize="Large"/>
-                <Editor WidthRequest="265"
+                <Editor WidthRequest="230"
                         StyleId="Name"
                         x:Name="Name">
                     <Editor.Triggers>
@@ -52,7 +52,7 @@
                 <Label Text="Status: "
                        FontSize="Large"/>
                 <Picker x:Name="statusPicker"
-                        WidthRequest="260"
+                        WidthRequest="230"
                         StyleId="Status">
                     <Picker.ItemsSource>
                         <x:Array Type="{x:Type x:String}">
@@ -83,12 +83,38 @@
                     </Editor.Triggers>
                 </Editor>
             </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Phone Number: "
+                       FontSize="Large"/>
+                <Editor WidthRequest="230"
+                        StyleId="Phone"
+                        x:Name="Phone">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Email Address: "
+                       FontSize="Large"/>
+                <Editor WidthRequest="230"
+                        StyleId="Email"
+                        x:Name="Email">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
             <Label Text="Assessments:"
                        FontSize="Large"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Performance Assessment- "
                        FontSize="Medium"/>
-                <Editor WidthRequest="190"
+                <Editor WidthRequest="230"
                         StyleId="Perform"
                         x:Name="Performance">
                     <Editor.Triggers>
@@ -101,7 +127,7 @@
             <StackLayout Orientation="Horizontal">
                 <Label Text="Objective Assessment- "
                        FontSize="Medium"/>
-                <Editor WidthRequest="190"
+                <Editor WidthRequest="230"
                         StyleId="Object"
                         x:Name="Objective">
                     <Editor.Triggers>
@@ -110,6 +136,12 @@
                         </EventTrigger>
                     </Editor.Triggers>
                 </Editor>
+            </StackLayout>            
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Term: "/>
+                <Editor IsEnabled="False"
+                        WidthRequest="230"
+                        x:Name="Term"/>
             </StackLayout>
             <StackLayout Orientation="Horizontal"
                          VerticalOptions="CenterAndExpand">

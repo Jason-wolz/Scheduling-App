@@ -9,7 +9,7 @@ namespace WGUTermApp
 
     public class TableMethods
     {
-        SQLiteConnection conn;
+        readonly SQLiteConnection conn;
         public TableMethods(string databasePath)
         {
             conn = new SQLiteConnection(databasePath);
@@ -62,7 +62,7 @@ namespace WGUTermApp
             }
         }
 
-        //dates likely won't be changed to datetimes here, but keep in mind it will have to happen, likely right before calling this function
+        
         public void AddNewRecord(Course course)
         {
             try
@@ -83,7 +83,7 @@ namespace WGUTermApp
         {
             try
             {
-                if (row > 0)
+                if (!(row < 0))
                 {
                     if (table == "Course")
                     {

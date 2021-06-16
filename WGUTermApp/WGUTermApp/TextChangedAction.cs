@@ -20,6 +20,8 @@ namespace TextChangeTrigger
             const string end = "End";
             const string status = "Status";
             const string instructor = "Instr";
+            const string phone = "Phone";
+            const string email = "Email";
             const string performance = "Perform";
             switch (visual.StyleId)
             {
@@ -47,13 +49,21 @@ namespace TextChangeTrigger
                     Editor editor1 = (Editor)visual;
                     app.Instructor = editor1.ToString();
                     break;
-                case performance:
+                case phone:
                     Editor editor2 = (Editor)visual;
-                    app.PerformanceAssessment = editor2.ToString();
+                    app.Phone = editor2.ToString();
+                    break;
+                case email:
+                    Editor editor3 = (Editor)visual;
+                    app.Email = editor3.ToString();
+                    break;
+                case performance:
+                    Editor editor4 = (Editor)visual;
+                    app.PerformanceAssessment = editor4.ToString();
                     break;
                 default:
-                    Editor editor3 = (Editor)visual;
-                    app.ObjectiveAssessment = editor3.ToString();
+                    Editor editor5 = (Editor)visual;
+                    app.ObjectiveAssessment = editor5.ToString();
                     break;
             }
             

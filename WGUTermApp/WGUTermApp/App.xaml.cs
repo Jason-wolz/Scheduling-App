@@ -12,6 +12,8 @@ namespace WGUTermApp
         static readonly string databasePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "CourseDatabase.db3");
         public static TableMethods Tables { get; private set; }
         public static int currentClass;
+        public static bool isNew;
+        public static int currentTerm;
         public App()
         {
             Tables = new TableMethods(databasePath);
@@ -36,6 +38,14 @@ namespace WGUTermApp
             {
                 Instructor = (string)Properties["instructor"];
             }
+            if (Properties.ContainsKey("phone"))
+            {
+                Phone = (string)Properties["phone"];
+            }
+            if (Properties.ContainsKey("email"))
+            {
+                Email = (string)Properties["email"];
+            }
             if (Properties.ContainsKey("performanceAssessment"))
             {
                 PerformanceAssessment = (string)Properties["performanceAssessment"];
@@ -56,6 +66,8 @@ namespace WGUTermApp
         public string EndDate { get; set; }
         public string Status { get; set; }
         public string Instructor { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
         public string PerformanceAssessment { get; set; }
         public string ObjectiveAssessment { get; set; }
         protected override void OnStart()
@@ -70,6 +82,8 @@ namespace WGUTermApp
             Properties["endDate"] = EndDate;
             Properties["status"] = Status;
             Properties["instructor"] = Instructor;
+            Properties["phone"] = Phone;
+            Properties["email"] = Email;
             Properties["performanceAssessment"] = PerformanceAssessment;
             Properties["objectiveAssessment"] = ObjectiveAssessment;
         }

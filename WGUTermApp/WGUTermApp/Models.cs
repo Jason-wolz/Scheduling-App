@@ -29,6 +29,15 @@ namespace WGUTermApp.Models
         {
         }
 
+        public bool IsEqual(Person p)
+        {
+            if (p.Name == this.Name && p.Phone == this.Phone && p.Email == this.Email)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public bool IsNullOrEmpty()
         {
             if (this == null)
@@ -92,6 +101,24 @@ namespace WGUTermApp.Models
         [NotNull]
         public int Term { get; set; }
 
+        public bool IsEqual(Course c)
+        {
+            if (this.Name == c.Name && this.Start == c.Start)
+            {
+                if (this.End == c.End && this.Status == c.Status)
+                {
+                    if (this.Instructor == c.Instructor && this.Term == c.Term)
+                    {
+                        if (this.Performance == c.Performance && this.Objective == c.Objective)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         public bool IsNullOrEmpty()
         {
             if (this == null)
@@ -127,6 +154,10 @@ namespace WGUTermApp.Models
                 return true;
             }
             if (Objective == null || Objective == "")
+            {
+                return true;
+            }
+            if (Term < 0)
             {
                 return true;
             }

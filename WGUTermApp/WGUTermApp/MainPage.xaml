@@ -3,21 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:WGUTermApp"
              x:Class="WGUTermApp.MainPage"
-             Title="WGU Courses for User">
-
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style x:Key="courseStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="DodgerBlue" />
-            </Style>
-            <Style x:Key="altCourseStyle" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="CornflowerBlue"/>
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+             Title="WGU Courses for User">    
     <ScrollView>
-        <StackLayout x:Name="Layout">            
-            
+        <StackLayout x:Name="Layout">                      
         </StackLayout>
     </ScrollView>
 </ContentPage>

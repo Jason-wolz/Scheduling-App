@@ -5,7 +5,6 @@
              Title="Course 1">
     <ContentPage.Content>
         <StackLayout>
-            <!--change text to implement database-->
             <StackLayout Orientation="Horizontal">
                 <Label Text="Duration: "/>
                 <DatePicker x:Name="Start" 
