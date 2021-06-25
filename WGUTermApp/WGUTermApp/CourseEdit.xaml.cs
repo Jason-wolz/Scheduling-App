@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using WGUTermApp.Models;
+using Plugin.LocalNotifications;
 
 namespace WGUTermApp
 {
@@ -108,6 +109,7 @@ namespace WGUTermApp
             }
 			await Navigation.PopModalAsync();
 			await Navigation.PopAsync();
+			CrossLocalNotifications.Current.Show("Reminder", "Remember to do the thing");
 		}
     }
 }
