@@ -15,6 +15,8 @@ namespace WGUTermApp
             conn = new SQLiteConnection(databasePath);
             conn.CreateTable<Person>();
             conn.CreateTable<Course>();
+            conn.DropTable<Assessment>();
+            conn.CreateTable<Assessment>();
         }
 
         public List<Person> GetAllPeople()
@@ -45,6 +47,19 @@ namespace WGUTermApp
             return new List<Course>();
         }
 
+        public List<Assessment> GetAllAssessments()
+        {
+            try
+            {
+                return conn.Table<Assessment>().ToList();
+            }
+            catch
+            {
+
+            }
+            return new List<Assessment>();
+        }
+
         //add data validation
         public void AddNewRecord(Person person)
         {
@@ -62,7 +77,22 @@ namespace WGUTermApp
             }
         }
 
-        
+        public void AddNewRecord(Assessment assessment)
+        {
+            try
+            {
+                if (assessment.IsNullOrEmpty())
+                {
+                    throw new Exception("Valid information required.");
+                }
+                conn.Insert(assessment);
+            }
+            catch
+            {
+
+            }
+        }
+
         public void AddNewRecord(Course course)
         {
             try
@@ -92,6 +122,10 @@ namespace WGUTermApp
                     else if (table == "Person")
                     {
                         conn.Delete<Person>(row);
+                    }
+                    else if (table == "Assessments")
+                    {
+                        conn.Delete<Assessment>(row);
                     }
                     else
                     {

@@ -44,11 +44,11 @@ namespace WGUTermApp.Models
             {
                 return true;
             }
-            if (Email == null || Email == "")
+            if (string.IsNullOrEmpty(Email))
             {
                 return true;
             }
-            if (Name == null || Name == "")
+            if (string.IsNullOrEmpty(Name))
             {
                 return true;
             }
@@ -56,7 +56,7 @@ namespace WGUTermApp.Models
             {
                 return true;
             }
-            if (Phone == null || Phone == "")
+            if (string.IsNullOrEmpty(Phone))
             {
                 return true;
             }
@@ -70,7 +70,7 @@ namespace WGUTermApp.Models
         {
         }
 
-        public Course(string name, DateTime start, DateTime end, string status, int instructor, string performance, string objective, int term)
+        public Course(string name, DateTime start, DateTime end, string status, int instructor, int performance, int objective, int term)
         {
             Name = name;
             Start = start;
@@ -95,9 +95,9 @@ namespace WGUTermApp.Models
         [NotNull]
         public int Instructor { get; set; }
         [MaxLength(100), NotNull]
-        public string Performance { get; set; }
+        public int Performance { get; set; }
         [MaxLength(100), NotNull]
-        public string Objective { get; set; }
+        public int Objective { get; set; }
         [NotNull]
         public int Term { get; set; }
 
@@ -129,7 +129,7 @@ namespace WGUTermApp.Models
             {
                 return true;
             }
-            if (Name == null || Name == "")
+            if (string.IsNullOrEmpty(Name))
             {
                 return true;
             }
@@ -141,7 +141,7 @@ namespace WGUTermApp.Models
             {
                 return true;
             }
-            if (Status == null || Status == "")
+            if (string.IsNullOrEmpty(Status))
             {
                 return true;
             }
@@ -149,15 +149,60 @@ namespace WGUTermApp.Models
             {
                 return true;
             }
-            if (Performance == null || Performance == "")
+            if (Performance < 0)
             {
                 return true;
             }
-            if (Objective == null || Objective == "")
+            if (Objective < 0)
             {
                 return true;
             }
             if (Term < 0)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
+    [Table("assessments")]
+    public class Assessment
+    {
+        [PrimaryKey, AutoIncrement]
+        public int AssessmentId { get; set; }
+        [MaxLength(50), NotNull]
+        public string Name { get; set; }
+        [MaxLength(50), NotNull]
+        public string Type { get; set; }
+        [MaxLength(500), NotNull]
+        public string Description { get; set; }
+        [NotNull]
+        public DateTime EstDueDate { get; set; }
+
+        public Assessment() { }
+
+        public Assessment(string name, string type, string description, DateTime dueDate)
+        {
+            Name = name;
+            Type = type;
+            Description = description;
+            EstDueDate = dueDate;
+        }
+
+        public bool IsNullOrEmpty()
+        {
+            if (string.IsNullOrEmpty(Name))
+            {
+                return true;
+            }
+            if (string.IsNullOrEmpty(Type))
+            {
+                return true;
+            }
+            if (string.IsNullOrEmpty(Description))
+            {
+                return true;
+            }
+            if (EstDueDate == default)
             {
                 return true;
             }

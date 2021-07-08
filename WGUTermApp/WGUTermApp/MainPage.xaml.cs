@@ -11,20 +11,21 @@ namespace WGUTermApp
 {
     public partial class MainPage : ContentPage
     {
-        bool isDeleting = false;
+        bool isDeleting;
         List<Course> courses;
         List<Person> people;
+        List<Assessment> assessments;
         public MainPage()
         {
             InitializeComponent();
             //delete all records from database
             courses = App.Tables.GetAllCourses();
-            while (courses.Count > 0)
-            {
-                App.Tables.DeleteRecord("Course", courses[0].CourseId);
-                courses = App.Tables.GetAllCourses();
-            }
-            //people = App.Tables.GetAllPeople();
+            //while (courses.Count > 0)
+            //{
+            //    App.Tables.DeleteRecord("Course", courses[0].CourseId);
+            //    courses = App.Tables.GetAllCourses();
+            //}
+            people = App.Tables.GetAllPeople();
             //while (people.Count > 0)
             //{
             //    App.Tables.DeleteRecord("Person", people[0].PersonId);
@@ -33,10 +34,14 @@ namespace WGUTermApp
 
             //sample data
             DateTime now = DateTime.Now.Date;
+            DateTime then = now.AddMonths(1);
+            assessments = App.Tables.GetAllAssessments();
+            App.Tables.AddNewRecord(new Assessment("Test 1", "Performance", "You will make a thing", then));
+            App.Tables.AddNewRecord(new Assessment("Test 2", "Objective", "You will do a thing", then));
             App.Tables.AddNewRecord(new Person("BobJim", "(333)-333-3333", "something@wgu.edu"));
-            App.Tables.AddNewRecord(new Course("Bacon 101", now, now.AddMonths(1), "In Progress", 1, "Test 1", "Test 2", 1));
-            App.Tables.AddNewRecord(new Course("Bacon 102", now, now.AddMonths(1), "In Progress", 1, "Test 1", "Test 2", 2));
-            //people = App.Tables.GetAllPeople();
+            App.Tables.AddNewRecord(new Course("Bacon 101", now, then, "In Progress", 1, 1, 2, 1));
+            App.Tables.AddNewRecord(new Course("Bacon 102", now, then, "In Progress", 1, 1, 2, 2));
+            people = App.Tables.GetAllPeople();
 
 
             //add all terms and courses in database to main page
@@ -44,6 +49,7 @@ namespace WGUTermApp
         protected override void OnAppearing()
         {
             BuildUI();
+            isDeleting = false;
         }
         public void BuildUI()
         {
@@ -126,6 +132,7 @@ namespace WGUTermApp
                             Button check = new Button
                             {
                                 BackgroundColor = Color.White,
+                                CornerRadius = 4,
                                 BorderWidth = 4,
                                 BorderColor = Color.White,
                                 WidthRequest = 35
@@ -159,7 +166,9 @@ namespace WGUTermApp
         private void Check_Clicked(object sender, EventArgs e)
         {
             var b = (Button)sender;
-            b.BackgroundColor = Color.Black;
+            b.BackgroundColor = b.BackgroundColor == Color.White ? Color.Navy : Color.White;
+
+
         }
 
         private void Button_Clicked1(object sender, EventArgs e)//change border color of check boxes
@@ -205,7 +214,7 @@ namespace WGUTermApp
                 {
                     var stack = (StackLayout)layout.Children[i];
                     var button = (Button)stack.Children[0];
-                    if (button.BackgroundColor == Color.Black)
+                    if (button.BackgroundColor == Color.Navy)
                     {
                         var deleted = (Button)stack.Children[1];
                         App.Tables.DeleteRecord("Course", int.Parse(deleted.StyleId));

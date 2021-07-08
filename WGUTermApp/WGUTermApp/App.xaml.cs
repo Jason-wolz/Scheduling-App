@@ -7,7 +7,7 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace WGUTermApp
 {
-    public partial class App : Application
+    public partial class App : Application//still converting assessments to ints for table compatibility
     {
         static readonly string databasePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "CourseDatabase.db3");
         public static TableMethods Tables { get; private set; }
@@ -17,7 +17,7 @@ namespace WGUTermApp
         public App()
         {
             Tables = new TableMethods(databasePath);
-
+            
             if (Properties.ContainsKey("name"))
             {
                 Name = (string)Properties["name"];

@@ -109,8 +109,8 @@
                     </Editor.Triggers>
                 </Editor>
             </StackLayout>
-            <Label Text="Assessments:"
-                       FontSize="Large"/>
+            <!--<Label Text="Assessments:"
+                   FontSize="Large"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Performance Assessment- "
                        FontSize="Medium"/>
@@ -136,7 +136,7 @@
                         </EventTrigger>
                     </Editor.Triggers>
                 </Editor>
-            </StackLayout>            
+            </StackLayout>-->            
             <StackLayout Orientation="Horizontal">
                 <Label Text="Term: "/>
                 <Editor IsEnabled="False"
