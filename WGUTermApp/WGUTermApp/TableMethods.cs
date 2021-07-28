@@ -1,22 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using SQLite;
 using WGUTermApp.Models;
 
 namespace WGUTermApp
 {
 
-    public class TableMethods
+    public class TableMethods//to-do: !!optional!! make methods return string to show error message?
     {
-        readonly SQLiteConnection conn;
+        private readonly SQLiteConnection conn;
         public TableMethods(string databasePath)
         {
             conn = new SQLiteConnection(databasePath);
+            //code to reset database
+            conn.DropTable<Person>();
+            conn.DropTable<Course>();
+            conn.DropTable<Assessment>();
+            conn.DropTable<Term>();
             conn.CreateTable<Person>();
             conn.CreateTable<Course>();
-            conn.DropTable<Assessment>();
             conn.CreateTable<Assessment>();
+            conn.CreateTable<Term>();
         }
 
         public List<Person> GetAllPeople()
@@ -25,9 +29,9 @@ namespace WGUTermApp
             {
                 return conn.Table<Person>().ToList();
             }
-            catch 
+            catch
             {
-                
+
             }
 
             return new List<Person>();
@@ -60,15 +64,24 @@ namespace WGUTermApp
             return new List<Assessment>();
         }
 
+        public List<Term> GetAllTerms()
+        {
+            try
+            {
+                return conn.Table<Term>().ToList();
+            }
+            catch
+            {
+
+            }
+            return new List<Term>();
+        }
+
         //add data validation
         public void AddNewRecord(Person person)
         {
             try
             {
-                if (person.IsNullOrEmpty())
-                {
-                    throw new Exception("Valid information required.");
-                }
                 conn.Insert(person);
             }
             catch
@@ -97,15 +110,87 @@ namespace WGUTermApp
         {
             try
             {
-                if (course.IsNullOrEmpty())
-                {
-                    throw new Exception("Valid information required.");
-                }
                 conn.Insert(course);
             }
             catch
             {
 
+            }
+        }
+
+        public void AddNewRecord(Term term)
+        {
+            try
+            {
+                if (term.IsNullOrEmpty())
+                {
+                    throw new Exception("Valid information required.");
+                }
+                conn.Insert(term);
+            }
+            catch
+            {
+
+            }
+        }
+
+        public void UpdateRecord(Object obj)
+        {
+            if (obj is Person person)
+            {
+                try
+                {
+                    conn.RunInTransaction(() =>
+                    {
+                        conn.Update(person);
+                    });
+                }
+                catch
+                {
+
+                }
+            }
+            else if (obj is Course course)
+            {
+                try
+                {
+                    conn.RunInTransaction(() =>
+                    {
+                        conn.Update(course);
+                    });
+                }
+                catch
+                {
+
+                }
+            }
+            else if (obj is Assessment assessment)
+            {
+                try
+                {
+                    conn.RunInTransaction(() =>
+                    {
+                        conn.Update(assessment);
+                    });
+                }
+                catch
+                {
+
+                }
+            }
+            else if (obj is Term term)
+            {
+                try
+                {
+                    conn.RunInTransaction(() =>
+                    {
+                        conn.Update(term);
+                    });
+                }
+                catch
+                {
+
+                }
             }
         }
 
@@ -115,21 +200,22 @@ namespace WGUTermApp
             {
                 if (!(row < 0))
                 {
-                    if (table == "Course")
+                    switch (table)
                     {
-                        conn.Delete<Course>(row);
-                    }
-                    else if (table == "Person")
-                    {
-                        conn.Delete<Person>(row);
-                    }
-                    else if (table == "Assessments")
-                    {
-                        conn.Delete<Assessment>(row);
-                    }
-                    else
-                    {
-                        throw new Exception("Valid information required.");
+                        case "Course":
+                            conn.Delete<Course>(row);
+                            break;
+                        case "Person":
+                            conn.Delete<Person>(row);
+                            break;
+                        case "Assessment":
+                            conn.Delete<Assessment>(row);
+                            break;
+                        case "Term":
+                            conn.Delete<Term>(row);
+                            break;
+                        default:
+                            throw new Exception("Valid information required.");
                     }
                 }
             }

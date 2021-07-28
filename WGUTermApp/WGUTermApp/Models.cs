@@ -29,42 +29,13 @@ namespace WGUTermApp.Models
         {
         }
 
-        public bool IsEqual(Person p)
-        {
-            if (p.Name == this.Name && p.Phone == this.Phone && p.Email == this.Email)
-            {
-                return true;
-            }
-            return false;
-        }
-
         public bool IsNullOrEmpty()
         {
-            if (this == null)
-            {
-                return true;
-            }
-            if (string.IsNullOrEmpty(Email))
-            {
-                return true;
-            }
-            if (string.IsNullOrEmpty(Name))
-            {
-                return true;
-            }
-            if (PersonId < 0)
-            {
-                return true;
-            }
-            if (string.IsNullOrEmpty(Phone))
-            {
-                return true;
-            }
-            return false;
+            return this == null || string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Name) || PersonId < 0 || string.IsNullOrEmpty(Phone);
         }
     }
     [Table("classes")]
-    public class Course//add another table for terms?
+    public class Course
     {
         public Course()
         {
@@ -101,67 +72,23 @@ namespace WGUTermApp.Models
         [NotNull]
         public int Term { get; set; }
 
-        public bool IsEqual(Course c)
-        {
-            if (this.Name == c.Name && this.Start == c.Start)
-            {
-                if (this.End == c.End && this.Status == c.Status)
-                {
-                    if (this.Instructor == c.Instructor && this.Term == c.Term)
-                    {
-                        if (this.Performance == c.Performance && this.Objective == c.Objective)
-                        {
-                            return true;
-                        }
-                    }
-                }
-            }
-            return false;
-        }
-
         public bool IsNullOrEmpty()
         {
             if (this == null)
             {
                 return true;
             }
-            if (this.CourseId < 0)
+            if (CourseId < 0 || string.IsNullOrEmpty(Name))
             {
                 return true;
             }
-            if (string.IsNullOrEmpty(Name))
+
+            if (Start == default || End == default)
             {
                 return true;
             }
-            if (Start == default)
-            {
-                return true;
-            }
-            if (End == default)
-            {
-                return true;
-            }
-            if (string.IsNullOrEmpty(Status))
-            {
-                return true;
-            }
-            if (Instructor < 0)
-            {
-                return true;
-            }
-            if (Performance < 0)
-            {
-                return true;
-            }
-            if (Objective < 0)
-            {
-                return true;
-            }
-            if (Term < 0)
-            {
-                return true;
-            }
-            return false;
+
+            return string.IsNullOrEmpty(Status) || Instructor < 0 || Performance < 0 || Objective < 0 || Term < 0;
         }
     }
     [Table("assessments")]
@@ -190,23 +117,33 @@ namespace WGUTermApp.Models
 
         public bool IsNullOrEmpty()
         {
-            if (string.IsNullOrEmpty(Name))
-            {
-                return true;
-            }
-            if (string.IsNullOrEmpty(Type))
-            {
-                return true;
-            }
-            if (string.IsNullOrEmpty(Description))
-            {
-                return true;
-            }
-            if (EstDueDate == default)
-            {
-                return true;
-            }
-            return false;
+            return string.IsNullOrEmpty(Name) || string.IsNullOrEmpty(Type) || string.IsNullOrEmpty(Description) || EstDueDate == default;
+        }
+    }
+    [Table("term")]
+    public class Term
+    {
+        [PrimaryKey, AutoIncrement]
+        public int TermId { get; set; }
+        [MaxLength(50)]
+        public string Name { get; set; }
+        [NotNull]
+        public DateTime Start { get; set; }
+        [NotNull]
+        public DateTime End { get; set; }
+
+        public Term() { }
+
+        public Term(string name, DateTime start, DateTime end)
+        {
+            Name = name;
+            Start = start;
+            End = end;
+        }
+
+        public bool IsNullOrEmpty()
+        {
+            return Start == default || End == default;
         }
     }
 }

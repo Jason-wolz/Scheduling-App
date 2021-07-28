@@ -5,14 +5,14 @@ using WGUTermApp;
 
 namespace TextChangeTrigger
 {
-    class TextChangedAction : TriggerAction<VisualElement>
+    internal class TextChangedAction : TriggerAction<VisualElement>
     {
-         public TextChangedAction()
+        public TextChangedAction()
         {
 
         }
 
-        protected override  void Invoke(VisualElement visual)
+        protected override void Invoke(VisualElement visual)
         {
             App app = Application.Current as App;
             const string name = "Name";
@@ -22,7 +22,6 @@ namespace TextChangeTrigger
             const string instructor = "Instr";
             const string phone = "Phone";
             const string email = "Email";
-            const string performance = "Perform";
             switch (visual.StyleId)
             {
                 case name:
@@ -57,16 +56,11 @@ namespace TextChangeTrigger
                     Editor editor3 = (Editor)visual;
                     app.Email = editor3.ToString();
                     break;
-                case performance:
-                    Editor editor4 = (Editor)visual;
-                    app.PerformanceAssessment = editor4.ToString();
-                    break;
                 default:
-                    Editor editor5 = (Editor)visual;
-                    app.ObjectiveAssessment = editor5.ToString();
+                    Editor editor4 = (Editor)visual;
+                    app.Description = editor4.ToString();
                     break;
             }
-            
         }
     }
 }

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="WGUTermApp.TermPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="Name: "
+                   FontSize="Large"
+                   x:Name="Name"/>
+            <Label Text="Duration: "
+                   FontSize="Large"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Start- " 
+                       FontSize="Medium"/>
+                <DatePicker Format="yyyy-MM-dd" 
+                            Date="2021-09-01"
+                            StyleId="Start"
+                            x:Name="Start"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="End- " 
+                       FontSize="Medium"/>
+                <DatePicker Format="yyyy-MM-dd" 
+                            Date="2021-09-30"
+                            StyleId="End"
+                            x:Name="End"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Term: "/>
+                <Editor IsEnabled="False"
+                        WidthRequest="230"
+                        x:Name="Term"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         VerticalOptions="CenterAndExpand">
+                <Button Text="Cancel"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="CancelButton"/>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

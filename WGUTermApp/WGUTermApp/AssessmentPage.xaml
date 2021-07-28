@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:TextChangeTrigger"
+             x:Class="WGUTermApp.AssessmentPage">
+    <ContentPage.Content>
+        <StackLayout>
+            <Label x:Name="ID"
+                   IsVisible="False"/>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Assessment Name: "
+                       FontSize="Large"/>
+                <Editor WidthRequest="200"
+                        x:Name="Name"
+                        StyleId="Name">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Type: "
+                       FontSize="Large"/>
+                <Editor WidthRequest="230"
+                        x:Name="Type"
+                        StyleId="Type"
+                        IsEnabled="False">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Description: "
+                       FontSize="Large"/>
+                <Editor WidthRequest="200"
+                        AutoSize="TextChanges"
+                        x:Name="Desc"
+                        StyleId="Desc">
+                    <Editor.Triggers>
+                        <EventTrigger Event="TextChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </Editor.Triggers>
+                </Editor>
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Estimated Due Date: "
+                       FontSize="Large"/>
+                <DatePicker Format="yyyy-MM-dd"
+                            x:Name="End"
+                            StyleId="End">
+                    <DatePicker.Triggers>
+                        <EventTrigger Event="PropertyChanged">
+                            <local:TextChangedAction/>
+                        </EventTrigger>
+                    </DatePicker.Triggers>
+                </DatePicker>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal">
+                <Button Text="Cancel"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="Cancel_Button"/>
+                <Button Text="Save"
+                        HorizontalOptions="CenterAndExpand"
+                        Clicked="Save_Button"/>
+                <Button Text="Delete"
+                        HorizontalOptions="CenterAndExpand"
+                        x:Name="Delete"
+                        Clicked="Delete_Button"/>
+            </StackLayout>
+            <Label x:Name="Note"
+                   FontSize="Large"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

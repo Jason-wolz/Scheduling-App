@@ -1,8 +1,6 @@
 ﻿using System;
-using SQLite;
 using WGUTermApp.Models;
 using System.Collections.Generic;
-using System.Linq;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Plugin.LocalNotifications;
@@ -13,33 +11,111 @@ namespace WGUTermApp
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CoursePage : ContentPage
     {
-        int startNoteID;
-        int endNoteID;
-        bool toggle = true;
+        private int startNoteID;
+        private int endNoteID;
+        private bool toggle = true;
+        private Assessment perf;
+        private Assessment obj;
+        private Course course = new Course();
+        private List<Course> courses;
         public CoursePage()
         {
             InitializeComponent();
-            List<Course> courses = App.Tables.GetAllCourses();//need to add system for adding/deleting assessments
+            courses = App.Tables.GetAllCourses();
             List<Person> people = App.Tables.GetAllPeople();
             List<Assessment> assessments = App.Tables.GetAllAssessments();
+            Person person = new Person();
             for (int i = 0; i < courses.Count; i++)
             {
                 if (courses[i].CourseId == App.currentClass)
                 {
-                    Course course = courses.ElementAt(i);
-                    Person person = people.ElementAt(course.Instructor - 1);
-                    Assessment perf = assessments.ElementAt(course.Performance - 1);
-                    Assessment obj = assessments.ElementAt(course.Objective - 1);
-                    Title = course.Name;
-                    statusPicker.SelectedItem = course.Status;
-                    Start.Date = course.Start;
-                    End.Date = course.End;
-                    Instructor.Text = person.Name + ", " + person.Phone + " \n" + person.Email;
-                    Objective.Text = obj.Name;
-                    Performance.Text = perf.Name;
+                    course = courses[i];
+                    break;
                 }
             }
-            MakeNewNote();            
+            for (int i = 0; i < people.Count; i++)
+            {
+                if (people[i].PersonId == course.Instructor)
+                {
+                    person = people[i];
+                }
+            }
+            int perfIndex = 0;
+            int objIndex = 0;
+            for (int i = 0; i < assessments.Count; i++)
+            {
+                if (assessments[i].AssessmentId == course.Performance)
+                {
+                    perfIndex = i;
+                }
+                if (assessments[i].AssessmentId == course.Objective)
+                {
+                    objIndex = i;
+                }
+            }
+            if (course.Performance > 0)
+            {
+                perf = assessments[perfIndex];
+                Performance.Text = perf.Name;
+            }
+            if (course.Objective > 0)
+            {
+
+                obj = assessments[objIndex];
+                Objective.Text = obj.Name;
+            }
+            Title = course.Name;
+            statusPicker.SelectedItem = course.Status;
+            Start.Date = course.Start;
+            End.Date = course.End;
+            Instructor.Text = person.Name + ", " + person.Phone + " \n" + person.Email;
+            MakeNewNote();
+        }
+
+        protected override void OnAppearing()
+        {
+            List<Assessment> assessments = App.Tables.GetAllAssessments();
+            courses = App.Tables.GetAllCourses();
+            for (int i = 0; i < courses.Count; i++)
+            {
+                if(courses[i].CourseId == App.currentClass)
+                {
+                    course = courses[i];
+                    break;
+                }
+            }
+            int perfIndex = -1;
+            int objIndex = -1;
+            for (int i = 0; i < assessments.Count; i++)
+            {
+                if (assessments[i].AssessmentId == course.Performance)
+                {
+                    perfIndex = i;
+                }
+                if (assessments[i].AssessmentId == course.Objective)
+                {
+                    objIndex = i;
+                }
+            }
+            if (course.Performance > 0)
+            {
+                perf = assessments[perfIndex];
+                Performance.Text = perf.Name;
+            }
+            else
+            {
+                Performance.Text = "Performance Assessment";
+            }
+            if (course.Objective > 0)
+            {
+
+                obj = assessments[objIndex];
+                Objective.Text = obj.Name;
+            }
+            else
+            {
+                Objective.Text = "Objective Assessment";
+            }
         }
 
         private async void CancelButton(object sender, EventArgs e)
@@ -50,12 +126,13 @@ namespace WGUTermApp
         private async void EditButton(object sender, EventArgs e)
         {
             App.isNew = false;
-            await Navigation.PushModalAsync(new CourseEdit());            
+            await Navigation.PushModalAsync(new CourseEdit());
         }
 
+        //make notifications for start and end of class, check for class currently going
+        //to-do: !!optional!! reloading page resets yes/no button to default
         private void Note_Clicked(object sender, EventArgs e)
         {
-            //make notifications, check for class currently going
             Button button = (Button)sender;
             if (button.BackgroundColor == Color.White)
             {
@@ -67,7 +144,7 @@ namespace WGUTermApp
                 {
                     message = Title + " will begin tomorrow at 1pm.";
                     startNoteID = App.currentClass + 10;
-                    //CrossLocalNotifications.Current.Show("Class begins tomorrow", message, startNoteID, Start.Date.AddDays(-1));
+                    CrossLocalNotifications.Current.Show("Class begins tomorrow", message, startNoteID, Start.Date.AddDays(-1));
                 }
                 message = Title + " will be ending one week from today. Make sure your assessments are done!";
                 endNoteID = App.currentClass + 100;
@@ -83,7 +160,6 @@ namespace WGUTermApp
                 CrossLocalNotifications.Current.Cancel(startNoteID);
                 CrossLocalNotifications.Current.Cancel(endNoteID);
             }
-            
         }
 
         private void MakeNewNote()
@@ -92,7 +168,7 @@ namespace WGUTermApp
             {
                 Text = "Date for reminder: ",
                 VerticalOptions = LayoutOptions.Center
-            };                        
+            };
             Label noteLabel = new Label
             {
                 Text = "Reminder: ",
@@ -121,7 +197,7 @@ namespace WGUTermApp
             StackLayout mainLayout = new StackLayout
             {
                 Children =
-                        {                            
+                        {
                             textLayout,
                             newNoteButton
                         }
@@ -133,14 +209,7 @@ namespace WGUTermApp
                 HorizontalOptions = LayoutOptions.Center,
                 Content = mainLayout,
             };
-            if (toggle)
-            {
-                noteFrame.BackgroundColor = Color.Goldenrod;
-            }
-            else
-            {
-                noteFrame.BackgroundColor = Color.Gold;
-            }
+            noteFrame.BackgroundColor = toggle ? Color.Goldenrod : Color.Gold;
             toggle = !toggle;
             noteLayout.Children.Add(noteFrame);
         }
@@ -161,7 +230,40 @@ namespace WGUTermApp
             else
             {
                 note.Placeholder = "Please enter the reminder text.";
-            }            
+            }
+        }
+
+        private async void Assessment_Clicked(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            if (b.StyleId == "Objective")
+            {
+                if (obj != null)
+                {
+                    App.isNew = false;
+                    await Navigation.PushModalAsync(new AssessmentPage(obj));
+                }
+                else
+                {
+                    App.isNew = true;
+                    Assessment temp = new Assessment { Type = b.StyleId };
+                    await Navigation.PushModalAsync(new AssessmentPage(temp));
+                }
+            }
+            else if (b.StyleId == "Performance")
+            {
+                if (perf != null)
+                {
+                    App.isNew = false;
+                    await Navigation.PushModalAsync(new AssessmentPage(perf));
+                }
+                else
+                {
+                    App.isNew = true;
+                    Assessment temp = new Assessment { Type = b.StyleId };
+                    await Navigation.PushModalAsync(new AssessmentPage(temp));
+                }
+            }
         }
     }
 }

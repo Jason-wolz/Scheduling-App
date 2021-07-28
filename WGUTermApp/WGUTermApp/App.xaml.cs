@@ -1,15 +1,14 @@
-﻿using System;
-using System.IO;
-using SQLite;
+﻿using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace WGUTermApp
 {
-    public partial class App : Application//still converting assessments to ints for table compatibility
+    //to-do: make alternate files w/o to do notes for submitting
+    public partial class App : Application//to-do: compare app to wireframe before submitting
     {
-        static readonly string databasePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "CourseDatabase.db3");
+        private static readonly string databasePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "CourseDatabase.db3");
         public static TableMethods Tables { get; private set; }
         public static int currentClass;
         public static bool isNew;
@@ -17,7 +16,6 @@ namespace WGUTermApp
         public App()
         {
             Tables = new TableMethods(databasePath);
-            
             if (Properties.ContainsKey("name"))
             {
                 Name = (string)Properties["name"];
@@ -46,13 +44,9 @@ namespace WGUTermApp
             {
                 Email = (string)Properties["email"];
             }
-            if (Properties.ContainsKey("performanceAssessment"))
+            if (Properties.ContainsKey("description"))
             {
-                PerformanceAssessment = (string)Properties["performanceAssessment"];
-            }
-            if (Properties.ContainsKey("objectiveAssessment"))
-            {
-                ObjectiveAssessment = (string)Properties["objectiveAssessment"];
+                Description = (string)Properties["description"];
             }
             MainPage = new NavigationPage(new MainPage())
             {
@@ -68,13 +62,12 @@ namespace WGUTermApp
         public string Instructor { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
-        public string PerformanceAssessment { get; set; }
-        public string ObjectiveAssessment { get; set; }
+        public string Description { get; set; }
         protected override void OnStart()
         {
             // Handle when your app starts
         }
-// Handle when your app sleeps
+        // Handle when your app sleeps
         protected override void OnSleep()
         {
             Properties["name"] = Name;
@@ -84,8 +77,7 @@ namespace WGUTermApp
             Properties["instructor"] = Instructor;
             Properties["phone"] = Phone;
             Properties["email"] = Email;
-            Properties["performanceAssessment"] = PerformanceAssessment;
-            Properties["objectiveAssessment"] = ObjectiveAssessment;
+            Properties["description"] = Description;
         }
 
         protected override void OnResume()

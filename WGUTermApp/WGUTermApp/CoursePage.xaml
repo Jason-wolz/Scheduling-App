@@ -65,77 +65,26 @@
                        Margin="0, 15, 0, 0"/>
                 <StackLayout Orientation="Horizontal"
                              x:Name="Assessments">
-                    <Frame BackgroundColor="CornflowerBlue"
-                           CornerRadius="3"
-                           Padding="15">
-                        <Label x:Name="Objective"
-                           Text="Objective Assessment"
-                           HorizontalOptions="StartAndExpand"/>
-                    </Frame>
-                    <Frame BackgroundColor="DodgerBlue"
-                           CornerRadius="3"
-                           Padding="15">
-                        <Label x:Name="Performance"
-                           Text="Performance Assessment"
-                           HorizontalOptions="StartAndExpand"/>
-                    </Frame>                
+                    <Button BackgroundColor="CornflowerBlue"
+                            CornerRadius="3"
+                            Padding="15"
+                            Clicked="Assessment_Clicked"
+                            x:Name="Objective"
+                            StyleId="Objective"
+                            Text="Objective Assessment"
+                            HorizontalOptions="Start"/>
+                    <Button BackgroundColor="DodgerBlue"
+                            CornerRadius="3"
+                            Padding="15"
+                            Clicked="Assessment_Clicked"
+                            x:Name="Performance"
+                            StyleId="Performance"
+                            Text="Performance Assessment"
+                            HorizontalOptions="StartAndExpand"/>                             
                 </StackLayout>
                 <Label Text="Notes to self:"
                        Margin="0, 15, 0, 0"/>
-                <StackLayout x:Name="noteLayout"><!--Figuring out good layout so I can recreate on demand in code behind-->
-                    <!--<Frame BackgroundColor="Goldenrod"
-                           CornerRadius="3"
-                           WidthRequest="250"
-                           HorizontalOptions="Center">
-                        <StackLayout>                            
-                            <StackLayout Orientation="Horizontal"
-                                         VerticalOptions="Center">
-                                <Label Text="Reminder: "
-                                       VerticalOptions="Center"/>
-                                <Editor StyleId="noteText"
-                                        AutoSize="TextChanges"
-                                        WidthRequest="170"/>
-                            </StackLayout>
-                            <Button Text="Remind me"
-                                    HorizontalOptions="Center"
-                                    Clicked="New_Note_Clicked"
-                                    StyleId="NotSent"/>
-                        </StackLayout>
-                    </Frame>
-                    <Frame BackgroundColor="Goldenrod"
-                           CornerRadius="3"
-                           WidthRequest="250"
-                           HorizontalOptions="Center">
-                        <StackLayout>
-                            <ScrollView>
-                                <StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Date for reminder: "
-                                            VerticalOptions="Center"/>
-                                        <DatePicker Format="yyyy-MM-dd" 
-                                                Date="2021-09-30"
-                                                FontSize="Small"/>
-                                    </StackLayout>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label Text="Reminder: "/>
-                                        <Editor StyleId="noteText"
-                                                AutoSize="TextChanges"
-                                                WidthRequest="150"/>
-
-                                    </StackLayout>
-                                </StackLayout>
-                            </ScrollView>
-                        </StackLayout>
-                    </Frame>
-                    <Frame BackgroundColor="Gold"
-                           CornerRadius="3"
-                           WidthRequest="250"
-                           HorizontalOptions="Center">
-                        <StackLayout>
-                                    
-                        </StackLayout>
-                    </Frame>-->
-                </StackLayout>
+                <StackLayout x:Name="noteLayout"/><!--Figuring out good layout so I can recreate on demand in code behind-->
                 <StackLayout Orientation="Horizontal">
                     <Button Text="Cancel"
                             Clicked="CancelButton"

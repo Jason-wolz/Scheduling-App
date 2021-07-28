@@ -5,6 +5,8 @@
              x:Class="WGUTermApp.CourseEdit">
     <ContentPage.Content>
         <StackLayout>
+            <Label x:Name="ID"
+                   IsVisible="false"/>
             <StackLayout Orientation="Horizontal">
                 <Label Text="Name: "
                        FontSize="Large"/>
@@ -109,34 +111,6 @@
                     </Editor.Triggers>
                 </Editor>
             </StackLayout>
-            <!--<Label Text="Assessments:"
-                   FontSize="Large"/>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Performance Assessment- "
-                       FontSize="Medium"/>
-                <Editor WidthRequest="230"
-                        StyleId="Perform"
-                        x:Name="Performance">
-                    <Editor.Triggers>
-                        <EventTrigger Event="TextChanged">
-                            <local:TextChangedAction/>
-                        </EventTrigger>
-                    </Editor.Triggers>
-                </Editor>
-            </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label Text="Objective Assessment- "
-                       FontSize="Medium"/>
-                <Editor WidthRequest="230"
-                        StyleId="Object"
-                        x:Name="Objective">
-                    <Editor.Triggers>
-                        <EventTrigger Event="TextChanged">
-                            <local:TextChangedAction/>
-                        </EventTrigger>
-                    </Editor.Triggers>
-                </Editor>
-            </StackLayout>-->            
             <StackLayout Orientation="Horizontal">
                 <Label Text="Term: "/>
                 <Editor IsEnabled="False"
@@ -152,6 +126,7 @@
                         HorizontalOptions="CenterAndExpand"
                         Clicked="SaveButton"/>
             </StackLayout>
+            <Label x:Name="Note"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
